@@ -24,24 +24,26 @@ namespace TS1FarExtractorGUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var folderselected = folderBrowserDialog1.SelectedPath;
+            
             openFileDialog1.ShowDialog();
+            Console.WriteLine((openFileDialog1.FileName));
+            Console.WriteLine((folderBrowserDialog1.SelectedPath));
             openFileDialog1.Title = "Select the far file of The Sims";
             openFileDialog1.DefaultExt = ".far";
             folderBrowserDialog1.ShowDialog();
-            var fileselected = openFileDialog1.FileName;
-            var farfile = new Far(fileselected);
+            var farfile = new Far(@openFileDialog1.FileName);
             foreach (var entry in farfile.Manifest.ManifestEntries)
                 try
                 {
-                    farfile.Extract(entry.ToString());
+                    farfile.Extract(entry,folderBrowserDialog1.SelectedPath,true);
+                    progressBar1.Increment(100);
                 }
                 catch
                 {
                     label1.Text = "Error";
                 }
             
-            progressBar1.Increment(100);
+            
             if (progressBar1.Value >= 100)
             {
                 label1.Text = "Done!";
