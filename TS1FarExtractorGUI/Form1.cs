@@ -35,12 +35,17 @@ namespace TS1FarExtractorGUI
                 try
                 {
                     farfile.Extract(entry.ToString());
-                    progressBar1.Increment(100);
                 }
                 catch
                 {
                     label1.Text = "Error";
                 }
+            
+            progressBar1.Increment(100);
+            if (progressBar1.Value >= 100)
+            {
+                MessageBox.Show("Done!");
+            }
         }
     }
 }
