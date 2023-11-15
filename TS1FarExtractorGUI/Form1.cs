@@ -44,7 +44,7 @@ namespace TS1FarExtractorGUI
             progressBar1.Increment(100);
             if (progressBar1.Value >= 100)
             {
-                MessageBox.Show("Done!");
+                label1.Text = "Done!";
             }
         }
     }
